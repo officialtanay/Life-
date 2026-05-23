@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life OS | Command Center</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Phosphor Icons for premium minimalistic icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+    <!-- Security Gateway -->
+    <div id="auth-screen" class="active">
+        <div class="auth-container glass-panel">
+            <h2>Hi Tanay</h2>
+            <p>Enter Master PIN</p>
+            <input type="password" id="pin-input" maxlength="5" placeholder="•••••">
+            <p id="auth-error" class="error-text"></p>
+            <button onclick="authenticate()">Initialize</button>
+        </div>
+    </div>
+
+    <!-- Main Application -->
+    <div id="app-dashboard" class="hidden">
+        
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar glass-panel">
+            <div class="brand">
+                <i class="ph ph-planet"></i> 
+                <span>Life OS</span>
+            </div>
+            <ul class="nav-links">
+                <li onclick="switchTab('dashboard')" class="active" id="nav-dashboard"><i class="ph ph-squares-four"></i> Dashboard</li>
+                <li onclick="switchTab('goals')" id="nav-goals"><i class="ph ph-target"></i> Goals & Vision</li>
+                <li onclick="switchTab('journal')" id="nav-journal"><i class="ph ph-book-open-text"></i> Journal</li>
+                <li onclick="switchTab('atar')" id="nav-atar"><i class="ph ph-graduation-cap"></i> WACE Calculator</li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="content-area">
+            
+            <!-- Dashboard View -->
+            <section id="view-dashboard" class="view active">
+                <header>
+                    <h1>Welcome back, Tanay.</h1>
+                    <p class="date-display" id="current-date"></p>
+                </header>
+                <div class="grid-layout">
+                    <div class="glass-panel widget">
+                        <h3>Today's Focus</h3>
+                        <p>No primary objective set for today.</p>
+                    </div>
+                    <div class="glass-panel widget">
+                        <h3>Quick Journal</h3>
+                        <textarea id="quick-journal" placeholder="What's on your mind?"></textarea>
+                        <button class="btn-small" onclick="saveQuickJournal()">Log Entry</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Goals & Vision View -->
+            <section id="view-goals" class="view hidden">
+                <header>
+                    <h1>Goals & Vision</h1>
+                </header>
+                <div class="glass-panel form-panel">
+                    <input type="text" id="goal-input" placeholder="Enter a new goal...">
+                    <button onclick="addGoal()">Add Goal</button>
+                </div>
+                <div id="goals-list" class="goals-grid"></div>
+            </section>
+
+            <!-- Journal View -->
+            <section id="view-journal" class="view hidden">
+                <header>
+                    <h1>Captain's Log</h1>
+                </header>
+                <div class="glass-panel form-panel">
+                    <textarea id="journal-input" placeholder="Reflect on the day..." rows="6"></textarea>
+                    <button onclick="saveJournal()">Save Entry</button>
+                </div>
+                <div id="journal-history"></div>
+            </section>
+
+            <!-- WACE ATAR Calculator View -->
+            <section id="view-atar" class="view hidden">
+                <header>
+                    <h1>WACE ATAR Engine</h1>
+                    <p>Calculates Tertiary Entrance Aggregate (TEA) based on Top 4 + 10% Bonuses</p>
+                </header>
+                <div class="glass-panel form-panel">
+                    <div class="subject-inputs" id="subject-inputs">
+                        <!-- JS will inject 5 subject rows here -->
+                    </div>
+                    <button onclick="calculateTEA()" class="btn-accent">Calculate Projection</button>
+                </div>
+                
+                <div class="glass-panel results-panel mt-4">
+                    <h3>Projected TEA: <span id="tea-result" class="highlight">0.0</span></h3>
+                    <p class="sub-text">Estimated ATAR Band: <span id="atar-result" class="highlight">--</span></p>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
